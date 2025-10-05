@@ -7,12 +7,13 @@ A comprehensive, modern Zsh configuration for macOS with XDG Base Directory comp
 - 🚀 **Fast Startup**: Optimized with Zinit's turbo mode (~0.2s startup time)
 - 📁 **XDG Compliant**: Clean home directory with `~/.config/zsh/` structure
 - 🎨 **Beautiful Prompt**: Starship prompt with Git integration
-- 🔧 **Version Management**: anyenv for Node.js, Python, and Ruby
+- 🔧 **Version Management**: anyenv with nodenv, pyenv, rbenv + auto-update plugin
 - 📦 **Plugin Management**: Zinit with syntax highlighting and auto-suggestions
-- 🎯 **Smart Completion**: Context-aware, case-insensitive completions
+- 🎯 **Smart Completion**: Context-aware, case-insensitive completions with Japanese support
 - 📝 **Rich History**: 10,000 commands with timestamps and session sharing
-- 🔀 **Git-Ready**: Extensive Git aliases and utilities
+- 🔀 **Git-Ready**: Extensive Git aliases and utilities (50+ aliases)
 - 🌐 **Multi-Language**: Pre-configured for Node.js, Python, and Ruby development
+- 🛠️ **Auto-Install Packages**: pnpm and claude-code installed automatically with Node.js
 
 ## Directory Structure
 
@@ -32,6 +33,7 @@ A comprehensive, modern Zsh configuration for macOS with XDG Base Directory comp
 │   └── ruby.zsh      # Ruby development aliases
 ├── .gitignore        # Git ignore rules
 ├── setup.sh          # Automated setup script
+├── LICENSE           # MIT License
 └── README.md         # This file
 
 ~/.config/starship.toml  # Starship prompt configuration
@@ -65,11 +67,13 @@ The script will:
 1. Check for Homebrew installation
 2. Install required tools (zsh, starship, gh, anyenv)
 3. Setup anyenv and install nodenv, pyenv, rbenv
-4. Create necessary symlinks (`~/.zshenv` → `~/.config/zsh/.zshenv`)
-5. Create required directories
-6. Optionally set zsh as default shell
-7. Optionally install Node.js LTS
-8. Optionally initialize Git repository
+4. Install anyenv-update plugin for easy updates
+5. Configure nodenv-default-packages plugin
+6. Create necessary symlinks (`~/.zshenv` → `~/.config/zsh/.zshenv`)
+7. Create required directories
+8. Optionally set zsh as default shell
+9. Optionally install Node.js LTS
+10. Optionally initialize Git repository
 
 ### Manual Setup
 
@@ -144,9 +148,11 @@ nodenv global 20.11.0
 
 # Verify installation
 node --version
-pnpm --version  # Auto-installed via default-packages
-claude-code --version  # Auto-installed via default-packages
+pnpm --version  # Auto-installed via nodenv-default-packages
+claude --version  # Auto-installed via nodenv-default-packages
 ```
+
+**Note**: The nodenv-default-packages plugin automatically installs pnpm and claude-code when you install any Node.js version.
 
 ### Install Python
 
@@ -187,7 +193,8 @@ ruby --version
 Edit `~/.config/zsh/env.zsh` to customize:
 - PATH modifications
 - Language-specific environment variables
-- Editor preferences
+- Editor preferences (neovim, vim, or vi)
+- Locale settings (default: `ja_JP.UTF-8`)
 - Custom environment variables
 
 ### Aliases
@@ -201,12 +208,20 @@ Aliases are organized by category in `~/.config/zsh/aliases/`:
 - `...` - Go up two directories
 
 **Git** (`git.zsh`):
+- `g` - `git`
 - `gs` - `git status`
 - `ga` - `git add`
+- `gaa` - `git add --all`
 - `gc` - `git commit`
+- `gcm` - `git commit -m` / `git checkout main|master`
 - `gp` - `git push`
 - `gl` - `git pull`
 - `glog` - Pretty log with graph
+- `gb` - `git branch`
+- `gco` - `git checkout`
+- `gd` - `git diff`
+- `gst` - `git stash`
+- And many more... (see `aliases/git.zsh:1`)
 
 **Node.js/pnpm** (`node.zsh`):
 - `pn` - `pnpm`
@@ -234,22 +249,27 @@ Available utility functions in `functions.zsh`:
 - `mkcd <dir>` - Create and cd into directory
 - `up <n>` - Go up N directories
 - `extract <file>` - Extract various archive formats
+- `find-in-files <text> [pattern]` - Search for text in files
 - `gignore <lang>` - Generate .gitignore from gitignore.io
 - `port-kill <port>` - Kill process on specified port
 - `git-cleanup` - Remove merged local branches
+- `git-main` - Checkout and update main/master branch
 - `myip` - Show external IP address
 - `localip` - Show local IP address
+- `sysinfo` - Display system information
 
 ### Starship Prompt
 
 Customize the prompt by editing `~/.config/starship.toml`.
 
 Current prompt shows:
-- Current directory (truncated)
+- Username and hostname
+- Current directory (truncated, with repo-aware path shortening)
 - Git branch and status
-- Language versions (Node.js, Python, Ruby)
+- Language versions (Node.js, Python, Ruby, Rust, Go)
+- Docker context
+- Package version
 - Command duration (for slow commands)
-- Time (optional, currently enabled)
 
 Documentation: https://starship.rs/config/
 
@@ -321,7 +341,7 @@ brewup  # Alias for: brew update && brew upgrade && brew cleanup
 ### Update anyenv and Language Versions
 
 ```bash
-anyenv update  # If anyenv-update plugin is installed
+anyenv update  # anyenv-update plugin is installed by setup.sh
 ```
 
 ### Update Zinit Plugins
@@ -377,7 +397,7 @@ Disable plugins one by one in `.zshrc` to identify the culprit.
 
 Rebuild completion cache:
 ```bash
-rm -f ~/.config/zsh/.zcompdump*
+rm -f ~/.config/zsh/.zcompdump
 exec zsh
 ```
 
@@ -469,6 +489,8 @@ Fork this configuration and customize it to your needs.
 - [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html)
 
 ## License
+
+MIT License - See [LICENSE](LICENSE) file for details.
 
 This configuration is provided as-is for personal use. Customize freely!
 
