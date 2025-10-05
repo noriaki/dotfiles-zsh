@@ -35,7 +35,7 @@ A comprehensive, modern Zsh configuration for macOS with XDG Base Directory comp
 └── README.md         # This file
 
 ~/.config/starship.toml  # Starship prompt configuration
-~/.anyenv/envs/nodenv/default-packages  # Auto-install pnpm & claude-code
+$(anyenv root)/envs/nodenv/default-packages  # Auto-install pnpm & claude-code
 ```
 
 ## Prerequisites
@@ -89,7 +89,6 @@ anyenv install --init
 
 Add to your shell (temporarily):
 ```bash
-export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
 ```
 

@@ -19,9 +19,7 @@ fi
 # anyenv - Unified Version Manager
 # ----------------------------------------------------------------------------
 # Manages nodenv, pyenv, rbenv, and other *env tools
-export ANYENV_ROOT="${HOME}/.anyenv"
-if [[ -d "${ANYENV_ROOT}" ]]; then
-  export PATH="${ANYENV_ROOT}/bin:${PATH}"
+if command -v anyenv &> /dev/null; then
   eval "$(anyenv init -)"
 fi
 
