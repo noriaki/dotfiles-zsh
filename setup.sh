@@ -92,29 +92,30 @@ done
 print_step "Setting up anyenv..."
 
 # Initialize anyenv if not already done
-if [[ ! -d "${HOME}/.anyenv" ]]; then
+ANYENV_MANIFEST_DIR="${HOME}/.config/anyenv/anyenv-install"
+if [[ ! -d "${ANYENV_MANIFEST_DIR}" ]]; then
     anyenv install --init
-    print_success "anyenv initialized"
+    print_success "anyenv initialized (manifest: ${ANYENV_MANIFEST_DIR})"
 else
     print_success "anyenv already initialized"
 fi
 
 # Install anyenv plugins
-if [[ ! -d "${HOME}/.anyenv/plugins/anyenv-update" ]]; then
-    mkdir -p "${HOME}/.anyenv/plugins"
-    git clone https://github.com/znz/anyenv-update.git "${HOME}/.anyenv/plugins/anyenv-update"
+ANYENV_ROOT="$(anyenv root 2>/dev/null || echo "${HOME}/.anyenv")"
+if [[ ! -d "${ANYENV_ROOT}/plugins/anyenv-update" ]]; then
+    mkdir -p "${ANYENV_ROOT}/plugins"
+    git clone https://github.com/znz/anyenv-update.git "${ANYENV_ROOT}/plugins/anyenv-update"
     print_success "anyenv-update plugin installed"
 else
     print_success "anyenv-update plugin already installed"
 fi
 
 # Source anyenv to use it in this script
-export PATH="${HOME}/.anyenv/bin:${PATH}"
 eval "$(anyenv init -)"
 
 # Install nodenv, pyenv, rbenv
 for env in nodenv pyenv rbenv; do
-    if anyenv versions "$env" &>/dev/null; then
+    if anyenv envs | grep -q "^${env}$"; then
         print_success "$env is already installed"
     else
         print_step "Installing $env..."
@@ -220,6 +221,7 @@ else
         if [[ -n "$LATEST_LTS" ]]; then
             nodenv install "$LATEST_LTS"
             nodenv global "$LATEST_LTS"
+            eval "$(anyenv init -)"
             print_success "Node.js $LATEST_LTS installed and set as global"
             print_success "pnpm and claude-code will be automatically installed"
         else
