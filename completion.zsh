@@ -61,9 +61,9 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 # Group matches and describe groups
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*:descriptions' format '%F{yellow}-- %d --%f'
-zstyle ':completion:*:warnings' format '%F{red}-- no matches found --%f'
+zstyle ':completion:*:warnings' format '%F{red}-- 一致する項目が見つかりません --%f'
 zstyle ':completion:*:messages' format '%F{purple}-- %d --%f'
-zstyle ':completion:*:corrections' format '%F{yellow}-- %d (errors: %e) --%f'
+zstyle ':completion:*:corrections' format '%F{yellow}-- %d (エラー数: %e) --%f'
 
 # Completion sorting and matching
 zstyle ':completion:*' sort true

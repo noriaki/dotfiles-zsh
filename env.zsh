@@ -63,8 +63,8 @@ fi
 # ----------------------------------------------------------------------------
 
 # Language
-export LANG='en_US.UTF-8'
-export LC_ALL='en_US.UTF-8'
+export LANG='ja_JP.UTF-8'
+export LC_ALL='ja_JP.UTF-8'
 
 # Less pager configuration
 export LESS='-R -F -X'
