@@ -125,6 +125,31 @@ for env in nodenv pyenv rbenv; do
     fi
 done
 
+# Configure nodenv default packages
+print_step "Configuring nodenv default packages..."
+NODENV_ROOT="${ANYENV_ROOT}/envs/nodenv"
+
+# Install nodenv-default-packages plugin
+if [[ ! -d "${NODENV_ROOT}/plugins/nodenv-default-packages" ]]; then
+    mkdir -p "${NODENV_ROOT}/plugins"
+    git clone https://github.com/nodenv/nodenv-default-packages.git "${NODENV_ROOT}/plugins/nodenv-default-packages"
+    print_success "nodenv-default-packages plugin installed"
+else
+    print_success "nodenv-default-packages plugin already installed"
+fi
+
+# Create default-packages file
+DEFAULT_PACKAGES_FILE="${NODENV_ROOT}/default-packages"
+if [[ ! -f "${DEFAULT_PACKAGES_FILE}" ]]; then
+    cat > "${DEFAULT_PACKAGES_FILE}" <<EOF
+pnpm
+@anthropic-ai/claude-code
+EOF
+    print_success "Created nodenv default-packages (pnpm, claude-code)"
+else
+    print_success "nodenv default-packages already exists"
+fi
+
 # ----------------------------------------------------------------------------
 # Create Symlinks
 # ----------------------------------------------------------------------------
@@ -223,7 +248,6 @@ else
             nodenv global "$LATEST_LTS"
             eval "$(anyenv init -)"
             print_success "Node.js $LATEST_LTS installed and set as global"
-            print_success "pnpm and claude-code will be automatically installed"
         else
             print_error "Could not determine latest LTS version"
         fi
