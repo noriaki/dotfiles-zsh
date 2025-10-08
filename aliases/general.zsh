@@ -10,8 +10,9 @@
 
 # ls with colors and formatting
 alias ls='ls -G'                    # Colorized output (macOS)
-alias ll='ls -lah'                  # Long format, all files, human-readable sizes
-alias la='ls -A'                    # All files except . and ..
+alias ll='ls -lh'                   # Long format, human-readable sizes
+alias la='ls -lAh'                  # All files except . and ..
+alias laa='ls -lah'                 # All files
 alias l='ls -CF'                    # Compact format with indicators
 alias lh='ls -lh'                   # Long format, human-readable sizes
 alias lt='ls -lht'                  # Long format, sorted by time
