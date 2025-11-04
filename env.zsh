@@ -73,6 +73,22 @@ export MANPAGER="less -R --use-color -Dd+r -Du+b"
 export MANROFFOPT="-P -c"
 
 # ----------------------------------------------------------------------------
+# ls Color Configuration
+# ----------------------------------------------------------------------------
+# Optimized for dark backgrounds / iTerm2
+# LSCOLORS format (BSD ls): directory, symlink, socket, pipe, executable,
+#                          block special, char special, setuid, setgid,
+#                          sticky dir, non-sticky writable dir
+# Ex=Directory (bright blue), Gx=Symlink (bright cyan), Cx=Socket (green),
+# Dx=Pipe (yellow), Bx=Executable (bright green)
+export LSCOLORS="ExGxCxDxBxegedabagacad"
+export CLICOLOR=1
+
+# LS_COLORS for completions and GNU tools (if present)
+# di=directory, ln=symlink, so=socket, pi=pipe, ex=executable
+export LS_COLORS="di=1;34:ln=1;36:so=32:pi=33:ex=1;32:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
+
+# ----------------------------------------------------------------------------
 # Custom PATH Additions
 # ----------------------------------------------------------------------------
 # Add local bin directories to PATH
