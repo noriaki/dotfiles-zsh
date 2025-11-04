@@ -17,3 +17,4 @@ export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 
 # History file location (XDG compliant)
 export HISTFILE="${ZDOTDIR}/.zsh_history"
+. "$HOME/.cargo/env"
