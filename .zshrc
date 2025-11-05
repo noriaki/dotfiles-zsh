@@ -33,6 +33,9 @@ source "${ZINIT_HOME}/zinit.zsh"
 zinit ice wait lucid
 zinit light zsh-users/zsh-syntax-highlighting
 
+# Keybindings - Must be loaded before plugins to override defaults
+[[ -f "${ZDOTDIR}/keybindings.zsh" ]] && source "${ZDOTDIR}/keybindings.zsh"
+
 # Auto-suggestions - Fish-like autosuggestions from history
 zinit ice wait lucid atload"_zsh_autosuggest_start"
 zinit light zsh-users/zsh-autosuggestions
