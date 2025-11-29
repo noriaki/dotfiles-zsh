@@ -44,8 +44,11 @@ export BUNDLE_SILENCE_ROOT_WARNING=1
 # ----------------------------------------------------------------------------
 # Editor Configuration
 # ----------------------------------------------------------------------------
-# Set default editor (choose your preference)
-if command -v nvim &> /dev/null; then
+# Set default editor with fallback chain: code > nvim > vim > vi
+if command -v code &> /dev/null; then
+  export EDITOR='code --wait'
+  export VISUAL='code --wait'
+elif command -v nvim &> /dev/null; then
   export EDITOR='nvim'
   export VISUAL='nvim'
 elif command -v vim &> /dev/null; then
