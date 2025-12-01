@@ -7,27 +7,21 @@
 # ----------------------------------------------------------------------------
 # pnpm - Fast, disk space efficient package manager
 # ----------------------------------------------------------------------------
+# Note: Basic operations (install, add, remove, run, test, upgrade) are handled
+# by ni.zsh with auto-detection. Use 'ni', 'ni add', 'ni remove', 'ni run', etc.
 
 alias pn='pnpm'
-alias pni='pnpm install'
-alias pna='pnpm add'
-alias pnad='pnpm add -D'
 alias pnag='pnpm add -g'
-alias pnr='pnpm remove'
 alias pnrg='pnpm remove -g'
 
-# pnpm scripts
-alias pnrun='pnpm run'
+# pnpm scripts (shortcuts for common scripts)
 alias pnd='pnpm run dev'
 alias pnb='pnpm run build'
-alias pnt='pnpm run test'
 alias pnl='pnpm run lint'
 alias pnf='pnpm run format'
 alias pns='pnpm start'
 
-# pnpm utilities
-alias pnup='pnpm update'
-alias pnupi='pnpm update --interactive'
+# pnpm utilities (pnpm-specific features)
 alias pnls='pnpm list'
 alias pnlsg='pnpm list -g'
 alias pnout='pnpm outdated'
@@ -36,16 +30,10 @@ alias pncc='pnpm store prune'
 # ----------------------------------------------------------------------------
 # npm - For when npm is still needed
 # ----------------------------------------------------------------------------
+# Note: Basic operations are handled by ni.zsh. Use 'ni', 'ni add', etc.
 
-alias ni='npm install'
-alias nia='npm install --save'
-alias nid='npm install --save-dev'
 alias nig='npm install -g'
-alias nun='npm uninstall'
-alias nup='npm update'
-alias nrun='npm run'
 alias nst='npm start'
-alias nt='npm test'
 alias nls='npm list'
 alias nlsg='npm list -g --depth=0'
 
@@ -89,21 +77,14 @@ alias nvr='nodenv rehash'
 # ----------------------------------------------------------------------------
 # Yarn (for projects still using it)
 # ----------------------------------------------------------------------------
+# Note: Basic operations are handled by ni.zsh. Use 'ni', 'ni add', etc.
 
 alias y='yarn'
-alias ya='yarn add'
-alias yad='yarn add --dev'
 alias yag='yarn global add'
-alias yr='yarn remove'
 alias yrg='yarn global remove'
-alias yup='yarn upgrade'
-alias yui='yarn upgrade-interactive'
 alias yout='yarn outdated'
-alias yi='yarn install'
 alias ys='yarn start'
 alias yb='yarn build'
-alias yt='yarn test'
-alias yrun='yarn run'
 
 # ----------------------------------------------------------------------------
 # Development servers and tools

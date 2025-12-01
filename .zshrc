@@ -44,6 +44,10 @@ zinit light zsh-users/zsh-autosuggestions
 zinit ice wait lucid blockf atpull'zinit creinstall -q .'
 zinit light zsh-users/zsh-completions
 
+# ni.zsh - Unified package manager wrapper (npm/yarn/pnpm/bun/deno)
+zinit ice wait lucid
+zinit light azu/ni.zsh
+
 # ----------------------------------------------------------------------------
 # Load Configuration Files
 # ----------------------------------------------------------------------------
