@@ -15,6 +15,9 @@ elif [[ -d "/usr/local/Homebrew" ]]; then
   eval "$(/usr/local/bin/brew shellenv)"
 fi
 
+# Hide Homebrew environment hints
+export HOMEBREW_NO_ENV_HINTS=1
+
 # ----------------------------------------------------------------------------
 # anyenv - Unified Version Manager
 # ----------------------------------------------------------------------------
